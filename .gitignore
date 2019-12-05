@@ -1,3 +1,5 @@
 Calculator.class
 Stack.class
 main.class
+CommandHandler.class
+SyntaxChecker.class
