@@ -15,6 +15,7 @@ class Stack {
 		Collections.reverse(reverseRegister);
 		if (this.printResult) {
 			System.out.println("Result : " + this.registers.get(0));
+			this.printResult = false;
 		}
 		System.out.println("Stack : " + reverseRegister);
 	}
