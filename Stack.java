@@ -3,30 +3,30 @@ import java.util.Collections;
 
 class Stack {
 
-	private boolean printResult = false;
 	private ArrayList<Float> registers;
 	
 	public Stack() {
 		this.registers = new ArrayList<Float>();
 	}
 	
+	public void printResult() {
+		if (this.registers.size() == 1) {
+			System.out.println("Result : " + this.registers.get(0));
+		}
+	}
+	
 	public void printRegisters() {
 		ArrayList<Float> reverseRegister = new ArrayList<Float>(this.registers);
 		Collections.reverse(reverseRegister);
-		if (this.printResult) {
-			System.out.println("Result : " + this.registers.get(0));
-			this.printResult = false;
-		}
 		System.out.println("Stack : " + reverseRegister);
 	}
 	
 	public void push(float number) {
 		this.registers.add(0, number);
-		this.printResult = false;
 	}
 	
-	private void checkTwoOperands() throws NullPointerException {
-		if (this.registers.size() < 2) throw new NullPointerException();
+	private void checkTwoOperands() throws IllegalArgumentException {
+		if (this.registers.size() < 2) throw new IllegalArgumentException();
 	}
 	
 	private float pop() {
@@ -43,30 +43,38 @@ class Stack {
 		try {
 			this.checkTwoOperands(); //Throws exception if less than 2 operands.
 			this.registers.add(0, this.pop() + this.pop());
-			this.printResult = true;
-		} catch (NullPointerException e) { System.out.println("Not enough numbers in the stack to perform addition"); }
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excpecting at least 2 numbers in the stack to perform addition");
+			throw e;
+		}
 	}
 	
 	public void sub() {
 		try {
 			this.checkTwoOperands(); //Throws exception if less than 2 operands.
 			this.registers.add(0, - this.pop() + this.pop());
-			this.printResult = true;
-		} catch (NullPointerException e) { System.out.println("Not enough numbers in the stack to perform substraction"); }
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excpecting at least 2 numbers in the stack to perform substraction");
+			throw e;
+		}
 	}
 	
 	public void mul() {
 		try {
 			this.checkTwoOperands(); //Throws exception if less than 2 operands.
 			this.registers.add(0, this.pop() * this.pop());
-			this.printResult = true;
-		} catch (NullPointerException e) { System.out.println("Not enough numbers in the stack to perform multiplication"); }
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excpecting at least 2 numbers in the stack to perform multiplication");
+			throw e;
+		}
 	}
 	public void div() {
 		try {
 			this.checkTwoOperands(); //Throws exception if less than 2 operands.
 			this.registers.add(0, 1/this.pop() * this.pop());
-			this.printResult = true;
-		} catch (NullPointerException e) { System.out.println("Not enough numbers in the stack to perform division"); }
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excpecting at least 2 numbers in the stack to perform division");
+			throw e;
+		}
 	}
 }

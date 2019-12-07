@@ -14,9 +14,13 @@ class CommandHandler {
 				this.stack.clear();
 				break;
 			case "help":
-				System.out.println("Type \"clear\" to erase all previous calculations.");
-				System.out.println("Type \"help\" to see this help.");
-				System.out.println("Type \"quit\" to quit.");
+				System.out.println("Please enter an RPN expression or a command: ");
+				System.out.println("  RPN expression involves float numbers and the operation +, -, *, / (e.g.: 1.1 -2 +).");
+				System.out.println("  A fully evaluated expression will display the result.");
+				System.out.println("  Incomplete expression are evaluated and the resulting stack is displayed.");
+				System.out.println("  Type \"clear\" to erase all previous calculations and empty the stack.");
+				System.out.println("  Type \"help\" to see this help.");
+				System.out.println("  Type \"quit\" to quit.");
 				break;
 			case "quit":
 				return false;

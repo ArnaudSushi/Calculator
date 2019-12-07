@@ -40,10 +40,16 @@ class SyntaxChecker {
 							throw e;
 					}
 				}
-				if (firstTurn) { firstTurn = !firstTurn; }
+				firstTurn = false;
 			}
-		} catch (NumberFormatException e) {  }
+		}
+		catch (NumberFormatException e) { }
+		catch (IllegalArgumentException e) {
+			this.stack.printRegisters();
+			return true;
+		}
 		this.stack.printRegisters();
+		this.stack.printResult();
 		return true;
 	}
 }
