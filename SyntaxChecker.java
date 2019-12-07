@@ -4,20 +4,22 @@ import java.util.ArrayList;
 class SyntaxChecker {
 	
 	private Stack stack;
+	private CommandHandler _commandHandler;
 	
 	public SyntaxChecker(Stack stack) {
 		this.stack = stack;
+		this._commandHandler = new CommandHandler(this.stack);
 	}
 	
 	public boolean checkInputs(String line) {
 		ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(line.trim().split("\\s+")));
 		boolean firstTurn = true;
 		try {
-			for (String input : inputs) {
+			for (String token : inputs) {
 				try {
-					this.stack.push(Float.parseFloat(input));
+					this.stack.push(Float.parseFloat(token));
 				} catch (NumberFormatException e) {
-					switch (input) {
+					switch (token) {
 						case "+":
 							this.stack.add();
 							break;
@@ -32,9 +34,9 @@ class SyntaxChecker {
 							break;
 						default:
 							if (firstTurn && inputs.size() == 1) {
-								return new CommandHandler(this.stack).executeCommand(input);
+								return this._commandHandler.executeCommand(token);
 							}
-							System.out.println("Non valid computation input \"" + input + "\", ending calculus");
+							System.out.println("Non valid computation input \"" + token + "\", ending calculus");
 							throw e;
 					}
 				}
