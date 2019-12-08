@@ -13,7 +13,6 @@ class SyntaxChecker {
 	
 	public boolean checkInputs(String line) {
 		ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(line.trim().split("\\s+")));
-		boolean firstTurn = true;
 		try {
 			for (String token : inputs) {
 				try {
@@ -33,15 +32,14 @@ class SyntaxChecker {
 							this.stack.div();
 							break;
 						default:
-							if (firstTurn && inputs.size() == 1) {
+							if (inputs.size() == 1) {
 								return this._commandHandler.executeCommand(token);
 							}
 							System.out.println("Non valid computation input \"" + token + "\", ending calculus");
 							throw e;
 					}
 				}
-				firstTurn = false;
-			}
+ 			}
 		}
 		catch (NumberFormatException e) { }
 		catch (IllegalArgumentException e) {
